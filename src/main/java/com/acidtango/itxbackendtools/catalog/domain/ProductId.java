@@ -18,7 +18,7 @@ public class ProductId extends ValueObject {
         return new ProductId(id);
     }
 
-    Integer getId() {
+    public Integer getValue() {
         return id;
     }
 }

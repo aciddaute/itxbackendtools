@@ -26,7 +26,7 @@ public class ProductStock extends ValueObject {
     }
 
     ProductStockPrimitives toPrimitives() {
-        return new ProductStockPrimitives(smallSizeStock.toPrimitives(), mediumSizeStock.toPrimitives(), largeSizeStock.toPrimitives());
+        return new ProductStockPrimitives(smallSizeStock.getValue(), mediumSizeStock.getValue(), largeSizeStock.getValue());
     }
 
 }

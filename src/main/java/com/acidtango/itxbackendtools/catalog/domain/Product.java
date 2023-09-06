@@ -25,7 +25,15 @@ public class Product extends AggregateRoot {
         return new Product(ProductId.fromPrimitives(primitives.id()), ProductName.fromPrimitives(primitives.name()), ProductStock.fromPrimitives(primitives.stock()));
     }
 
-    ProductPrimitives toPrimitives() {
-        return new ProductPrimitives(id.getId(), name.toPrimitives(), stock.toPrimitives());
+    public ProductPrimitives toPrimitives() {
+        return new ProductPrimitives(id.getValue(), name.getValue(), stock.toPrimitives());
+    }
+
+    public ProductId getId() {
+        return id;
+    }
+
+    public boolean hasName(String expectedName) {
+        return this.name.getValue().equals(expectedName);
     }
 }

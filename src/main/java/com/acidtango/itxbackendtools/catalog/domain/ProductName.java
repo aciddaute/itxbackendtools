@@ -18,7 +18,7 @@ public class ProductName extends ValueObject {
         return new ProductName(name);
     }
 
-    String toPrimitives() {
+    String getValue() {
         return name;
     }
 

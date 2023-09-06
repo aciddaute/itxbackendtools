@@ -18,7 +18,7 @@ public class StockAmount extends ValueObject {
         return new StockAmount(units);
     }
 
-    Integer toPrimitives() {
+    Integer getValue() {
         return units;
     }
 
