@@ -22,5 +22,4 @@ public class StockAmount extends ValueObject {
         return units;
     }
 
-
 }

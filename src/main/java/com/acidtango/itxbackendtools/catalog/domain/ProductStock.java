@@ -29,4 +29,9 @@ public class ProductStock extends ValueObject {
         return stock;
     }
 
+    public boolean hasTotalStock(Integer expectedTotalStock) {
+        Integer totalStock = stock.values().stream().map(StockAmount::getValue).reduce(Integer::sum).orElse(0);
+        
+        return totalStock.equals(expectedTotalStock);
+    }
 }

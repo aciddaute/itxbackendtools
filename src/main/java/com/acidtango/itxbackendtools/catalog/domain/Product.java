@@ -36,4 +36,8 @@ public class Product extends AggregateRoot {
     public boolean hasName(String expectedName) {
         return this.name.getValue().equals(expectedName);
     }
+
+    public boolean hasTotalStock(Integer expectedTotalStock) {
+        return this.stock.hasTotalStock(expectedTotalStock);
+    }
 }

@@ -48,4 +48,12 @@ public class CreateProductTest {
         Product newProduct = productsRepository.findById(newProductId);
         assertTrue(newProduct.hasName("BRAND NEW T-SHIRT"));
     }
+
+    @Test
+    void products_are_created_with_zero_stock() {
+        ProductId newProductId = createProduct.run("Brandy t-shirt");
+
+        Product newProduct = productsRepository.findById(newProductId);
+        assertTrue(newProduct.hasTotalStock(0));
+    }
 }
