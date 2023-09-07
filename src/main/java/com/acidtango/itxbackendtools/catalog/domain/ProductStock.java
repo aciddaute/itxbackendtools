@@ -1,32 +1,32 @@
 package com.acidtango.itxbackendtools.catalog.domain;
 
-import com.acidtango.itxbackendtools.catalog.domain.primitives.ProductStockPrimitives;
 import com.acidtango.itxbackendtools.shared.domain.ValueObject;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class ProductStock extends ValueObject {
 
-    final StockAmount smallSizeStock;
+    final HashMap<ProductSize, StockAmount> stock;
 
-    final StockAmount mediumSizeStock;
-
-    final StockAmount largeSizeStock;
-
-    private ProductStock(StockAmount smallSizeStock, StockAmount mediumSizeStock, StockAmount largeSizeStock) {
-        this.smallSizeStock = smallSizeStock;
-        this.mediumSizeStock = mediumSizeStock;
-        this.largeSizeStock = largeSizeStock;
+    private ProductStock(HashMap<ProductSize, StockAmount> stock) {
+        this.stock = stock;
     }
 
     static ProductStock zero() {
-        return new ProductStock(StockAmount.zero(), StockAmount.zero(), StockAmount.zero());
+        HashMap<ProductSize, StockAmount> stock = new HashMap<>();
+        Arrays.asList(ProductSize.values())
+                .forEach(size -> stock.put(size, StockAmount.zero()));
+
+        return new ProductStock(stock);
     }
 
-    static ProductStock fromPrimitives(ProductStockPrimitives primitives) {
-        return new ProductStock(StockAmount.fromPrimitives(primitives.smallUnits()), StockAmount.fromPrimitives(primitives.mediumUnits()), StockAmount.fromPrimitives(primitives.largeUnits()));
+    static ProductStock fromPrimitives(HashMap<ProductSize, StockAmount> primitives) {
+        return new ProductStock(primitives);
     }
 
-    ProductStockPrimitives toPrimitives() {
-        return new ProductStockPrimitives(smallSizeStock.getValue(), mediumSizeStock.getValue(), largeSizeStock.getValue());
+    HashMap<ProductSize, StockAmount> toPrimitives() {
+        return stock;
     }
 
 }
