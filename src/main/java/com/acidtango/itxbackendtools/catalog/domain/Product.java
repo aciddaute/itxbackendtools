@@ -3,13 +3,15 @@ package com.acidtango.itxbackendtools.catalog.domain;
 import com.acidtango.itxbackendtools.catalog.domain.primitives.ProductPrimitives;
 import com.acidtango.itxbackendtools.shared.domain.AggregateRoot;
 
+import java.util.HashMap;
+
 public class Product extends AggregateRoot {
 
     final ProductId id;
 
     final ProductName name;
 
-    final ProductStock stock;
+    ProductStock stock;
 
     private Product(ProductId id, ProductName name, ProductStock stock) {
         this.id = id;
@@ -22,7 +24,8 @@ public class Product extends AggregateRoot {
     }
 
     public static Product fromPrimitives(ProductPrimitives primitives) {
-        return new Product(ProductId.fromPrimitives(primitives.id()), ProductName.fromPrimitives(primitives.name()), ProductStock.fromPrimitives(primitives.stock()));
+        return new Product(ProductId.fromPrimitives(primitives.id()), ProductName.fromPrimitives(primitives.name()),
+                ProductStock.fromPrimitives(primitives.stock()));
     }
 
     public ProductPrimitives toPrimitives() {
@@ -34,10 +37,19 @@ public class Product extends AggregateRoot {
     }
 
     public boolean hasName(String expectedName) {
-        return this.name.getValue().equals(expectedName);
+        return name.getValue().equals(expectedName);
     }
 
-    public boolean hasTotalStock(Integer expectedTotalStock) {
-        return this.stock.hasTotalStock(expectedTotalStock);
+    public boolean hasTotalStock(Integer expectedStock) {
+        return stock.hasTotalStock(expectedStock);
+    }
+
+    public boolean hasSizeStock(ProductSize size, Integer expectedStock) {
+        return stock.hasSizeStock(size, expectedStock);
+    }
+
+
+    public void restock(HashMap<ProductSize, Integer> newUnits) {
+        stock = stock.restock(newUnits);
     }
 }
