@@ -1,10 +1,10 @@
-package com.acidtango.itxbackendtools.catalog.infrastructure.repository;
+package com.acidtango.itxbackendtools.catalog.products.infrastructure.repository;
 
-import com.acidtango.itxbackendtools.catalog.domain.Product;
-import com.acidtango.itxbackendtools.catalog.domain.ProductId;
-import com.acidtango.itxbackendtools.catalog.domain.ProductsRepository;
-import com.acidtango.itxbackendtools.catalog.domain.errors.ProductDoesNotExist;
-import com.acidtango.itxbackendtools.catalog.domain.primitives.ProductPrimitives;
+import com.acidtango.itxbackendtools.catalog.products.domain.Product;
+import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
+import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExist;
+import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductPrimitives;
 
 import java.util.HashMap;
 import java.util.List;

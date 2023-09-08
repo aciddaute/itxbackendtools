@@ -1,4 +1,4 @@
-package com.acidtango.itxbackendtools.catalog.domain;
+package com.acidtango.itxbackendtools.catalog.products.domain;
 
 import java.util.List;
 

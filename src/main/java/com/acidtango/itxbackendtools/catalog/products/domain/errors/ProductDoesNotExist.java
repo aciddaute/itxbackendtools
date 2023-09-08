@@ -1,6 +1,6 @@
-package com.acidtango.itxbackendtools.catalog.domain.errors;
+package com.acidtango.itxbackendtools.catalog.products.domain.errors;
 
-import com.acidtango.itxbackendtools.catalog.domain.ProductId;
+import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
 
 public class ProductDoesNotExist extends RuntimeException {
 

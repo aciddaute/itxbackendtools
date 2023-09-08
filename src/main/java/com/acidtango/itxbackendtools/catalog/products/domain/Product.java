@@ -1,6 +1,6 @@
-package com.acidtango.itxbackendtools.catalog.domain;
+package com.acidtango.itxbackendtools.catalog.products.domain;
 
-import com.acidtango.itxbackendtools.catalog.domain.primitives.ProductPrimitives;
+import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductPrimitives;
 import com.acidtango.itxbackendtools.shared.domain.AggregateRoot;
 
 import java.util.HashMap;

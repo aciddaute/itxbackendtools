@@ -1,6 +1,6 @@
-package com.acidtango.itxbackendtools.catalog.domain;
+package com.acidtango.itxbackendtools.catalog.products.domain;
 
-import com.acidtango.itxbackendtools.catalog.domain.errors.NegativeRestockUnits;
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.NegativeRestockUnits;
 import com.acidtango.itxbackendtools.shared.domain.ValueObject;
 
 public class StockAmount extends ValueObject {
@@ -10,7 +10,7 @@ public class StockAmount extends ValueObject {
     private StockAmount(Integer units) {
         this.units = units;
     }
-    
+
     public static StockAmount zero() {
         return new StockAmount(0);
     }

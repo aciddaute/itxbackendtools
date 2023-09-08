@@ -1,4 +1,4 @@
-package com.acidtango.itxbackendtools.catalog.domain.errors;
+package com.acidtango.itxbackendtools.catalog.products.domain.errors;
 
 public class NegativeRestockUnits extends RuntimeException {
 
