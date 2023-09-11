@@ -4,7 +4,9 @@ import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
 import com.acidtango.itxbackendtools.shared.application.UseCase;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateProduct extends UseCase {
 
     private final ProductsRepository productsRepository;

@@ -17,7 +17,6 @@ public class ProductStock extends ValueObject {
 
     static ProductStock zero() {
         HashMap<ProductSize, StockAmount> stock = new HashMap<>();
-        // Arrays.asList(ProductSize.values()).forEach(size -> stock.put(size, StockAmount.zero()));
 
         return new ProductStock(stock);
     }
