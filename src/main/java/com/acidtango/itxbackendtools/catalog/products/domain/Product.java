@@ -48,7 +48,6 @@ public class Product extends AggregateRoot {
         return stock.hasSizeStock(size, expectedStock);
     }
 
-
     public void restock(HashMap<ProductSize, Integer> newUnits) {
         stock = stock.restock(newUnits);
     }
