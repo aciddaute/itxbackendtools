@@ -3,7 +3,7 @@ package com.acidtango.itxbackendtools.catalog.products.infrastructure.repository
 import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
-import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExist;
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExistError;
 import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductPrimitives;
 
 import java.util.HashMap;
@@ -35,6 +35,6 @@ public class MemoryProductsRepository implements ProductsRepository {
     public Product findById(ProductId productId) {
         Optional<ProductPrimitives> primitives = Optional.ofNullable(products.get(productId.getValue()));
 
-        return Product.fromPrimitives(primitives.orElseThrow(() -> new ProductDoesNotExist(productId)));
+        return Product.fromPrimitives(primitives.orElseThrow(() -> new ProductDoesNotExistError(productId)));
     }
 }

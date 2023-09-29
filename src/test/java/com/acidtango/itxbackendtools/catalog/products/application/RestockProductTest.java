@@ -4,8 +4,8 @@ import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductSize;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
-import com.acidtango.itxbackendtools.catalog.products.domain.errors.NegativeRestockUnits;
-import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExist;
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.NegativeRestockUnitsError;
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExistError;
 import com.acidtango.itxbackendtools.catalog.products.infrastructure.repository.MemoryProductsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -94,7 +94,7 @@ public class RestockProductTest {
         HashMap<ProductSize, Integer> restockUnits = new HashMap<>();
         restockUnits.put(ProductSize.S, 5);
 
-        assertThrows(ProductDoesNotExist.class, () -> restockProduct.run(ProductId.createNew(-100), restockUnits));
+        assertThrows(ProductDoesNotExistError.class, () -> restockProduct.run(ProductId.createNew(-100), restockUnits));
     }
 
     @Test
@@ -103,6 +103,6 @@ public class RestockProductTest {
         HashMap<ProductSize, Integer> restockUnits = new HashMap<>();
         restockUnits.put(ProductSize.S, -1);
 
-        assertThrows(NegativeRestockUnits.class, () -> restockProduct.run(productId, restockUnits));
+        assertThrows(NegativeRestockUnitsError.class, () -> restockProduct.run(productId, restockUnits));
     }
 }
