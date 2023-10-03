@@ -6,4 +6,5 @@ public interface SalesRepository {
 
     Integer getNextId();
 
+    Sale findById(SaleId id);
 }

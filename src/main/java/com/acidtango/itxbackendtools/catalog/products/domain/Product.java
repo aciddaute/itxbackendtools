@@ -1,6 +1,8 @@
 package com.acidtango.itxbackendtools.catalog.products.domain;
 
+import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductOutOfStockError;
 import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductPrimitives;
+import com.acidtango.itxbackendtools.catalog.sales.domain.RequiredStock;
 import com.acidtango.itxbackendtools.shared.domain.AggregateRoot;
 
 import java.util.Map;
@@ -50,5 +52,12 @@ public class Product extends AggregateRoot {
 
     public void restock(Map<ProductSize, Integer> newUnits) {
         stock = stock.restock(newUnits);
+    }
+
+    public void ensureStockAvailability(RequiredStock requiredStock) {
+        boolean enoughStock = stock.hasEnoughStock(requiredStock);
+        if (!enoughStock) {
+            throw new ProductOutOfStockError(id, requiredStock.size());
+        }
     }
 }

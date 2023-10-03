@@ -39,4 +39,15 @@ public class SaleItem extends ValueObject {
         return new SaleItemPrimitives(productId.getValue(), productSize, amount);
     }
 
+    public String getProductIdAndSizeIdentifier() {
+        return productId.getValue().toString() + "-" + productSize;
+    }
+
+    public RequiredStock toRequiredStock() {
+        return new RequiredStock(productId, productSize, amount);
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
 }

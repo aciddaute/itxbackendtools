@@ -1,5 +1,6 @@
 package com.acidtango.itxbackendtools.catalog.sales.domain;
 
+import com.acidtango.itxbackendtools.catalog.sales.domain.errors.SaleDuplicateItemsError;
 import com.acidtango.itxbackendtools.catalog.sales.domain.primitives.SalePrimitives;
 import com.acidtango.itxbackendtools.shared.domain.AggregateRoot;
 
@@ -16,6 +17,14 @@ public class Sale extends AggregateRoot {
     }
 
     public static Sale createNew(SaleId id, List<SaleItem> items) {
+        
+        boolean duplicateItems =
+                items.stream().map(SaleItem::getProductIdAndSizeIdentifier).distinct().count() != items.size();
+
+        if (duplicateItems) {
+            throw new SaleDuplicateItemsError();
+        }
+
         return new Sale(id, items);
     }
 
@@ -26,5 +35,15 @@ public class Sale extends AggregateRoot {
 
     public SalePrimitives toPrimitives() {
         return new SalePrimitives(id.getValue(), items.stream().map(SaleItem::toPrimitives).toList());
+    }
+
+    public SaleId getId() {
+        return id;
+    }
+
+
+    public boolean hasTotalUnits(Integer expectedTotalUnits) {
+        Integer totalUnits = items.stream().map(SaleItem::getAmount).reduce(Integer::sum).orElse(0);
+        return totalUnits.equals(expectedTotalUnits);
     }
 }

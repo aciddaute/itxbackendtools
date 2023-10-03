@@ -1,5 +1,6 @@
 package com.acidtango.itxbackendtools.catalog.products.domain;
 
+import com.acidtango.itxbackendtools.catalog.sales.domain.RequiredStock;
 import com.acidtango.itxbackendtools.shared.domain.ValueObject;
 
 import java.util.HashMap;
@@ -55,5 +56,11 @@ public class ProductStock extends ValueObject {
         this.stock.keySet().stream().filter((size) -> !updatedStock.containsKey(size)).forEach(size -> updatedStock.put(size, getStockFor(size)));
 
         return new ProductStock(updatedStock);
+    }
+
+    public boolean hasEnoughStock(RequiredStock requiredStock) {
+        Integer sizeStock = getStockFor(requiredStock.size()).getValue();
+
+        return requiredStock.amount() <= sizeStock;
     }
 }

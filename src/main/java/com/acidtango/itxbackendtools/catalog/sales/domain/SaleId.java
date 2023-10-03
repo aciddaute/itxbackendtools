@@ -20,6 +20,15 @@ public class SaleId extends ValueObject {
     public Integer getValue() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof SaleId other)) {
+            return false;
+        }
+
+        return id.equals(other.getValue());
+    }
 }
 
 
