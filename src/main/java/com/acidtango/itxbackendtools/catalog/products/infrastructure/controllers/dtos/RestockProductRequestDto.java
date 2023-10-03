@@ -2,7 +2,7 @@ package com.acidtango.itxbackendtools.catalog.products.infrastructure.controller
 
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductSize;
 
-import java.util.HashMap;
+import java.util.Map;
 
-public record RestockProductRequestDto(HashMap<ProductSize, Integer> newUnits) {
+public record RestockProductRequestDto(Map<ProductSize, Integer> newUnits) {
 }

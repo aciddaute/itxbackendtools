@@ -2,11 +2,11 @@ package com.acidtango.itxbackendtools.catalog.products.infrastructure.controller
 
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductSize;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record ProductStockResponseDto(Integer smallUnits, Integer mediumUnits, Integer largeUnits) {
 
-    public ProductStockResponseDto(HashMap<ProductSize, Integer> stock) {
+    public ProductStockResponseDto(Map<ProductSize, Integer> stock) {
         this(stock.get(ProductSize.S), stock.get(ProductSize.M), stock.get(ProductSize.L));
     }
 }

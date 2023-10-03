@@ -9,20 +9,20 @@ import java.util.stream.Collectors;
 
 public class ProductStock extends ValueObject {
 
-    final HashMap<ProductSize, StockAmount> stock;
+    final Map<ProductSize, StockAmount> stock;
 
-    private ProductStock(HashMap<ProductSize, StockAmount> stock) {
+    private ProductStock(Map<ProductSize, StockAmount> stock) {
         this.stock = stock;
     }
 
     static ProductStock zero() {
-        HashMap<ProductSize, StockAmount> stock = new HashMap<>();
+        Map<ProductSize, StockAmount> stock = new HashMap<>();
 
         return new ProductStock(stock);
     }
 
-    static ProductStock fromPrimitives(HashMap<ProductSize, Integer> primitives) {
-        HashMap<ProductSize, StockAmount> stock =
+    static ProductStock fromPrimitives(Map<ProductSize, Integer> primitives) {
+        Map<ProductSize, StockAmount> stock =
                 primitives.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
                         entry -> StockAmount.fromPrimitives(entry.getValue()),
                         (firstEntry, secondEntry) -> firstEntry, HashMap::new));
@@ -34,7 +34,7 @@ public class ProductStock extends ValueObject {
         return Optional.ofNullable(stock.get(size)).orElse(StockAmount.zero());
     }
 
-    HashMap<ProductSize, Integer> toPrimitives() {
+    Map<ProductSize, Integer> toPrimitives() {
         return stock.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,
                 entry -> entry.getValue().getValue(), (firstEntry, secondEntry) -> firstEntry, HashMap::new));
     }
@@ -48,8 +48,8 @@ public class ProductStock extends ValueObject {
         return getStockFor(size).getValue().equals(expectedStock);
     }
 
-    public ProductStock restock(HashMap<ProductSize, Integer> restockUnits) {
-        HashMap<ProductSize, StockAmount> updatedStock = new HashMap<>();
+    public ProductStock restock(Map<ProductSize, Integer> restockUnits) {
+        Map<ProductSize, StockAmount> updatedStock = new HashMap<>();
 
         restockUnits.forEach((size, newUnits) -> updatedStock.put(size, getStockFor(size).restock(newUnits)));
         this.stock.keySet().stream().filter((size) -> !updatedStock.containsKey(size)).forEach(size -> updatedStock.put(size, getStockFor(size)));

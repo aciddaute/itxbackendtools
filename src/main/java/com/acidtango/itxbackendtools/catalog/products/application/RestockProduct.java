@@ -7,7 +7,7 @@ import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
 import com.acidtango.itxbackendtools.shared.application.UseCase;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RestockProduct extends UseCase {
@@ -19,7 +19,7 @@ public class RestockProduct extends UseCase {
     }
 
 
-    public void run(ProductId productId, HashMap<ProductSize, Integer> newUnits) {
+    public void run(ProductId productId, Map<ProductSize, Integer> newUnits) {
 
         Product product = productsRepository.findById(productId);
 

@@ -3,7 +3,7 @@ package com.acidtango.itxbackendtools.catalog.products.domain;
 import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductPrimitives;
 import com.acidtango.itxbackendtools.shared.domain.AggregateRoot;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Product extends AggregateRoot {
 
@@ -48,7 +48,7 @@ public class Product extends AggregateRoot {
         return stock.hasSizeStock(size, expectedStock);
     }
 
-    public void restock(HashMap<ProductSize, Integer> newUnits) {
+    public void restock(Map<ProductSize, Integer> newUnits) {
         stock = stock.restock(newUnits);
     }
 }
