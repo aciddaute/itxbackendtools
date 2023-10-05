@@ -12,12 +12,16 @@ import com.acidtango.itxbackendtools.catalog.sales.domain.SaleId;
 import com.acidtango.itxbackendtools.catalog.sales.domain.SaleItem;
 import com.acidtango.itxbackendtools.catalog.sales.domain.SalesRepository;
 import com.acidtango.itxbackendtools.catalog.sales.domain.errors.SaleDuplicateItemsError;
+import com.acidtango.itxbackendtools.catalog.sales.domain.events.SaleCreated;
 import com.acidtango.itxbackendtools.catalog.sales.infrastructure.repository.MemorySalesRepository;
+import com.acidtango.itxbackendtools.shared.domain.DomainEvent;
+import com.acidtango.itxbackendtools.shared.infrastructure.FakeEventBus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,13 +31,16 @@ public class CreateSaleTest {
 
     private ProductsRepository productsRepository = new MemoryProductsRepository();
 
-    private CreateSale createSale = new CreateSale(salesRepository, productsRepository);
+    private FakeEventBus fakeEventBus = new FakeEventBus();
+
+    private CreateSale createSale = new CreateSale(salesRepository, productsRepository, fakeEventBus);
 
     @BeforeEach
     void init() {
         salesRepository = new MemorySalesRepository();
         productsRepository = new MemoryProductsRepository();
-        createSale = new CreateSale(salesRepository, productsRepository);
+        fakeEventBus = new FakeEventBus();
+        createSale = new CreateSale(salesRepository, productsRepository, fakeEventBus);
     }
 
     void createProducts() {
@@ -83,6 +90,20 @@ public class CreateSaleTest {
 
         assertEquals(saleId, createdSale.getId());
         assertTrue(createdSale.hasTotalUnits(17));
+    }
+
+    @Test
+    void publishes_sale_created_event_when_finishes_successfully() {
+        createProducts();
+        SaleId newSaleId = createSale.run(List.of(SaleItem.createNew(ProductId.fromPrimitives(1), ProductSize.S, 1)));
+
+        Optional<DomainEvent> publishedEvent = fakeEventBus.getOlderEventOfType(SaleCreated.class);
+
+        assertTrue(fakeEventBus.nEventsHasBeenPublished(1));
+        assertTrue(fakeEventBus.eventHasBeenPublishedNTimes(SaleCreated.class, 1));
+        assertTrue(publishedEvent.isPresent());
+        assertTrue(publishedEvent.get() instanceof SaleCreated);
+        assertEquals(((SaleCreated) publishedEvent.get()).id, newSaleId.getValue());
     }
 
     @Test
