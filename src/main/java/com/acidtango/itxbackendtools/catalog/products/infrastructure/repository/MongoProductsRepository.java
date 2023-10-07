@@ -7,7 +7,6 @@ import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesN
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -28,11 +27,6 @@ public class MongoProductsRepository implements ProductsRepository {
     @Override
     public Integer getNextId() {
         return Math.toIntExact(crudRepository.count()) + 1;
-    }
-
-    @Override
-    public List<Product> getProducts() {
-        return crudRepository.findAll().stream().map(ProductDocument::toDomain).toList();
     }
 
     @Override

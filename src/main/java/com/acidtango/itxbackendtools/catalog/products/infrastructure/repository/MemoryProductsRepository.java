@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -28,11 +27,6 @@ public class MemoryProductsRepository implements ProductsRepository {
     @Override
     public Integer getNextId() {
         return products.size() + 1;
-    }
-
-    @Override
-    public List<Product> getProducts() {
-        return products.values().stream().map(Product::fromPrimitives).toList();
     }
 
     @Override
