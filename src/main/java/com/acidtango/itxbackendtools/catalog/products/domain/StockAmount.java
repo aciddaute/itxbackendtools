@@ -23,12 +23,16 @@ public class StockAmount extends ValueObject {
         return units;
     }
 
-    public StockAmount restock(Integer units) {
+    public StockAmount restock(Integer restockUnits) {
 
-        if (units < 0) {
-            throw new NegativeRestockUnitsError(units);
+        if (restockUnits < 0) {
+            throw new NegativeRestockUnitsError(restockUnits);
         }
 
-        return new StockAmount(this.units + units);
+        return new StockAmount(this.units + restockUnits);
+    }
+
+    public StockAmount adjustAfterSale(Integer saleUnits) {
+        return new StockAmount(this.units - saleUnits);
     }
 }

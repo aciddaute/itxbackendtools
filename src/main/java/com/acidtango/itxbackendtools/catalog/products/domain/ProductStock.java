@@ -63,4 +63,13 @@ public class ProductStock extends ValueObject {
 
         return requiredStock.amount() <= sizeStock;
     }
+
+    public ProductStock adjustAfterSale(ProductSize productSize, Integer amount) {
+        Map<ProductSize, StockAmount> updatedStock = new HashMap<>();
+        this.stock.keySet().forEach(size -> updatedStock.put(size, getStockFor(size)));
+
+        updatedStock.put(productSize, getStockFor(productSize).adjustAfterSale(amount));
+
+        return new ProductStock(updatedStock);
+    }
 }

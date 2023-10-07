@@ -15,23 +15,26 @@ public class Product extends AggregateRoot {
 
     ProductStock stock;
 
-    private Product(ProductId id, ProductName name, ProductStock stock) {
+    SaleUnits saleUnits;
+
+    private Product(ProductId id, ProductName name, ProductStock stock, SaleUnits saleUnits) {
         this.id = id;
         this.name = name;
         this.stock = stock;
+        this.saleUnits = saleUnits;
     }
 
     public static Product createNew(ProductId id, String name) {
-        return new Product(id, ProductName.createNew(name), ProductStock.zero());
+        return new Product(id, ProductName.createNew(name), ProductStock.zero(), SaleUnits.zero());
     }
 
     public static Product fromPrimitives(ProductPrimitives primitives) {
         return new Product(ProductId.fromPrimitives(primitives.id()), ProductName.fromPrimitives(primitives.name()),
-                ProductStock.fromPrimitives(primitives.stock()));
+                ProductStock.fromPrimitives(primitives.stock()), SaleUnits.fromPrimitives(primitives.saleUnits()));
     }
 
     public ProductPrimitives toPrimitives() {
-        return new ProductPrimitives(id.getValue(), name.getValue(), stock.toPrimitives());
+        return new ProductPrimitives(id.getValue(), name.getValue(), stock.toPrimitives(), saleUnits.getValue());
     }
 
     public ProductId getId() {
@@ -59,5 +62,14 @@ public class Product extends AggregateRoot {
         if (!enoughStock) {
             throw new ProductOutOfStockError(id, requiredStock.size());
         }
+    }
+
+    public void adjustStockAfterSale(ProductSize productSize, Integer amount) {
+        stock = stock.adjustAfterSale(productSize, amount);
+        saleUnits = saleUnits.add(amount);
+    }
+
+    public boolean hasSaleUnits(Integer expectedSaleUnits) {
+        return saleUnits.getValue().equals(expectedSaleUnits);
     }
 }
