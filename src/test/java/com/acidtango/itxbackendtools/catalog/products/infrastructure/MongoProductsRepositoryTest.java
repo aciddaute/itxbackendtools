@@ -3,8 +3,8 @@ package com.acidtango.itxbackendtools.catalog.products.infrastructure;
 
 import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.repository.MongoProductsCrudRepository;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.repository.MongoProductsRepository;
+import com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories.MongoProductsCrudRepository;
+import com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories.MongoProductsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

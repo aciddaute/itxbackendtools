@@ -6,7 +6,7 @@ import com.acidtango.itxbackendtools.catalog.products.domain.ProductSize;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
 import com.acidtango.itxbackendtools.catalog.products.domain.errors.NegativeRestockUnitsError;
 import com.acidtango.itxbackendtools.catalog.products.domain.errors.ProductDoesNotExistError;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.repository.MemoryProductsRepository;
+import com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories.MemoryProductsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

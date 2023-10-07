@@ -3,7 +3,7 @@ package com.acidtango.itxbackendtools.catalog.products.application;
 import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductsRepository;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.repository.MemoryProductsRepository;
+import com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories.MemoryProductsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

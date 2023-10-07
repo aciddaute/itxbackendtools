@@ -1,4 +1,4 @@
-package com.acidtango.itxbackendtools.catalog.products.infrastructure.repository;
+package com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories;
 
 import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductSize;

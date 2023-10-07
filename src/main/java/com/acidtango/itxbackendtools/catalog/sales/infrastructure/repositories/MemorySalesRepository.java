@@ -1,4 +1,4 @@
-package com.acidtango.itxbackendtools.catalog.sales.infrastructure.repository;
+package com.acidtango.itxbackendtools.catalog.sales.infrastructure.repositories;
 
 import com.acidtango.itxbackendtools.catalog.sales.domain.Sale;
 import com.acidtango.itxbackendtools.catalog.sales.domain.SaleId;
