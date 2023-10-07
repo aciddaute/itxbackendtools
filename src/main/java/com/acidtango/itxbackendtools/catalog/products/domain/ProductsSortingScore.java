@@ -14,16 +14,15 @@ public class ProductsSortingScore extends ValueObject {
         return new ProductsSortingScore(score);
     }
 
-    public static ProductsSortingScore createNew(Integer score) {
-        return new ProductsSortingScore(Double.valueOf(score));
+    public static ProductsSortingScore zero() {
+        return new ProductsSortingScore(0d);
     }
 
     Double getValue() {
         return score;
     }
 
-    ProductsSortingScore applyWeightMultiplier(Double weight) {
-        Double result = score * weight;
-        return new ProductsSortingScore(result);
+    ProductsSortingScore add(ProductsSortingScore other) {
+        return new ProductsSortingScore(score + other.score);
     }
 }

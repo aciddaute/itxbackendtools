@@ -1,5 +1,12 @@
 package com.acidtango.itxbackendtools.catalog.products.domain;
 
-public interface ProductsSortingCriteria {
-    ProductsSortingScore computeScore(Product product);
+public abstract class ProductsSortingCriteria {
+
+    protected final Double weight;
+
+    public ProductsSortingCriteria(Double weight) {
+        this.weight = weight;
+    }
+
+    abstract ProductsSortingScore computeScore(Product product);
 }
