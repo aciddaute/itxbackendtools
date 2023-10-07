@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,6 +41,19 @@ public class MongoProductsRepositoryTest {
 
         assertTrue(first.hasName("BASIC T-SHIRT"));
         assertTrue(second.hasName("FABRIC T-SHIRT"));
+    }
+
+    @Test
+    void retrieves_all_products() {
+        repository.save(Product.createNew(ProductId.createNew(1), "Basic black t-shirt"));
+        repository.save(Product.createNew(ProductId.createNew(2), "Basic green t-shirt"));
+        repository.save(Product.createNew(ProductId.createNew(3), "Basic blue t-shirt"));
+        repository.save(Product.createNew(ProductId.createNew(4), "Basic pink t-shirt"));
+        repository.save(Product.createNew(ProductId.createNew(5), "Basic yellow t-shirt"));
+
+        List<Product> allProducts = repository.getProducts();
+
+        assertEquals(allProducts.size(), 5);
     }
 
     @Test
