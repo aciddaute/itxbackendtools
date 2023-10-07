@@ -72,4 +72,12 @@ public class Product extends AggregateRoot {
     public boolean hasSaleUnits(Integer expectedSaleUnits) {
         return saleUnits.getValue().equals(expectedSaleUnits);
     }
+
+    public Integer getTotalStock() {
+        return stock.getTotalStock();
+    }
+
+    public Integer getSaleUnits() {
+        return saleUnits.getValue();
+    }
 }

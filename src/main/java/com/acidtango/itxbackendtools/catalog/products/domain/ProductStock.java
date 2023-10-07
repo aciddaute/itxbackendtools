@@ -40,8 +40,12 @@ public class ProductStock extends ValueObject {
                 entry -> entry.getValue().getValue(), (firstEntry, secondEntry) -> firstEntry, HashMap::new));
     }
 
+    public Integer getTotalStock() {
+        return stock.values().stream().map(StockAmount::getValue).reduce(Integer::sum).orElse(0);
+    }
+
     public boolean hasTotalStock(Integer expectedTotalStock) {
-        Integer totalStock = stock.values().stream().map(StockAmount::getValue).reduce(Integer::sum).orElse(0);
+        Integer totalStock = getTotalStock();
         return totalStock.equals(expectedTotalStock);
     }
 
