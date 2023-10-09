@@ -4,7 +4,7 @@ import com.acidtango.itxbackendtools.catalog.products.domain.primitives.ProductP
 
 import java.util.Map;
 
-public record ProductReadModel(Integer id, String name, Map<ProductSize, Integer> stock, Integer salesUnits,
+public record ProductReadModel(Integer id, String name, Map<ProductSize, Integer> stock, Integer saleUnits,
                                Double sortingScore) {
 
 

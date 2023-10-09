@@ -3,17 +3,19 @@ package com.acidtango.itxbackendtools.catalog.products.infrastructure.controller
 
 import com.acidtango.itxbackendtools.catalog.products.application.CreateProduct;
 import com.acidtango.itxbackendtools.catalog.products.application.GetProduct;
+import com.acidtango.itxbackendtools.catalog.products.application.ListProducts;
 import com.acidtango.itxbackendtools.catalog.products.application.RestockProduct;
 import com.acidtango.itxbackendtools.catalog.products.domain.Product;
 import com.acidtango.itxbackendtools.catalog.products.domain.ProductId;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.controllers.dtos.CreateProductRequestDto;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.controllers.dtos.CreateProductResponseDto;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.controllers.dtos.ProductResponseDto;
-import com.acidtango.itxbackendtools.catalog.products.infrastructure.controllers.dtos.RestockProductRequestDto;
+import com.acidtango.itxbackendtools.catalog.products.domain.ProductReadModel;
+import com.acidtango.itxbackendtools.catalog.products.domain.ProductsSortingSpecification;
+import com.acidtango.itxbackendtools.catalog.products.infrastructure.controllers.dtos.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -27,6 +29,9 @@ public class ProductsController {
 
     @Autowired
     private GetProduct getProductUseCase;
+
+    @Autowired
+    private ListProducts listProducts;
 
 
     @PostMapping()
@@ -51,5 +56,17 @@ public class ProductsController {
         Product product = getProductUseCase.run(id);
 
         return new ProductResponseDto(product.toPrimitives());
+    }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    ListProductsResponseDto getProducts(@RequestParam(required = false) Double saleUnitsWeight,
+                                        @RequestParam(required = false) Double stockWeight) {
+        ProductsSortingSpecification sortingSpecification = ProductsSortingSpecification.createNew(saleUnitsWeight,
+                stockWeight);
+
+        List<ProductReadModel> products = listProducts.run(sortingSpecification);
+
+        return new ListProductsResponseDto(products.stream().map(ProductReadModelResponseDto::new).toList());
     }
 }

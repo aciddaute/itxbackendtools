@@ -1,5 +1,7 @@
 package com.acidtango.itxbackendtools.catalog.products.domain;
 
+import java.util.Optional;
+
 public class ProductsSortingSpecification {
 
     private final Double saleUnitsCriteriaWeight;
@@ -11,8 +13,9 @@ public class ProductsSortingSpecification {
         this.stockCriteriaWeight = stockCriteriaWeight;
     }
 
-    public static ProductsSortingSpecification createNew(Double saleUnitsWeight, Double stockCriteriaWeight) {
-        return new ProductsSortingSpecification(saleUnitsWeight, stockCriteriaWeight);
+    public static ProductsSortingSpecification createNew(Double saleUnitsCriteriaWeight, Double stockCriteriaWeight) {
+        return new ProductsSortingSpecification(Optional.ofNullable(saleUnitsCriteriaWeight).orElse(1d),
+                Optional.ofNullable(stockCriteriaWeight).orElse(1d));
     }
 
     public ProductsSortingScore computeCompoundSortingScore(Product product) {

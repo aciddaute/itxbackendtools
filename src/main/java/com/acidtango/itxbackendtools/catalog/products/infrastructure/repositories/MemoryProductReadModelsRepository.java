@@ -1,10 +1,12 @@
 package com.acidtango.itxbackendtools.catalog.products.infrastructure.repositories;
 
 import com.acidtango.itxbackendtools.catalog.products.domain.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Component
 public class MemoryProductReadModelsRepository implements ProductReadModelsRepository {
 
     ProductsRepository productsRepository;
