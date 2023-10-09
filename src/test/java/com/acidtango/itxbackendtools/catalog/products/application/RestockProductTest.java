@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RestockProductTest {
 
-    private ProductsRepository productsRepository = new MemoryProductsRepository();
+    private ProductsRepository productsRepository;
 
-    private RestockProduct restockProduct = new RestockProduct(productsRepository);
+    private RestockProduct restockProduct;
 
     @BeforeEach
     void init() {

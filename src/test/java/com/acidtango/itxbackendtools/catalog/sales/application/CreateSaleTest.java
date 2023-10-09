@@ -27,13 +27,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateSaleTest {
 
-    private SalesRepository salesRepository = new MemorySalesRepository();
+    private SalesRepository salesRepository;
 
-    private ProductsRepository productsRepository = new MemoryProductsRepository();
+    private ProductsRepository productsRepository;
 
-    private FakeEventBus fakeEventBus = new FakeEventBus();
+    private FakeEventBus fakeEventBus;
 
-    private CreateSale createSale = new CreateSale(salesRepository, productsRepository, fakeEventBus);
+    private CreateSale createSale;
 
     @BeforeEach
     void init() {

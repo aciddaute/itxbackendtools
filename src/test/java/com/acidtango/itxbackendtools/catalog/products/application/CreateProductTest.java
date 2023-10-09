@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateProductTest {
 
-    private ProductsRepository productsRepository = new MemoryProductsRepository();
+    private ProductsRepository productsRepository;
 
-    private CreateProduct createProduct = new CreateProduct(productsRepository);
+    private CreateProduct createProduct;
 
     @BeforeEach
     void init() {

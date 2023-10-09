@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class SaleCreatedHandlerTest {
-    private ProductsRepository productsRepository = new MemoryProductsRepository();
+    private ProductsRepository productsRepository;
 
-    private SaleCreatedHandler saleCreatedHandler = new SaleCreatedHandler(productsRepository);
+    private SaleCreatedHandler saleCreatedHandler;
 
     @BeforeEach
     void init() {
