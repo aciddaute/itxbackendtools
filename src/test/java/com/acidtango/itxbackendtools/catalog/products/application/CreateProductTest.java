@@ -7,9 +7,7 @@ import com.acidtango.itxbackendtools.catalog.products.infrastructure.repositorie
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateProductTest {
@@ -26,17 +24,12 @@ public class CreateProductTest {
 
 
     @Test
-    void stores_newly_created_products_in_repository() {
+    void creates_and_persist_product() {
+        ProductId productId = createProduct.run("Brand new t-shirt");
 
-        createProduct.run("Brand new t-shirt");
-        List<Product> productsAfterFirstCreation = productsRepository.getProducts();
+        Product product = productsRepository.findById(productId);
 
-        createProduct.run("Red t-shirt");
-        List<Product> productsAfterSecondCreation = productsRepository.getProducts();
-
-
-        assertEquals(productsAfterFirstCreation.size(), 1);
-        assertEquals(productsAfterSecondCreation.size(), 2);
+        assertNotNull(product);
     }
 
     @Test
