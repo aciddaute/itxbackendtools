@@ -27,7 +27,7 @@ public class MongoProductsRepositoryTest {
 
     @BeforeEach
     void init() {
-        mongoTemplate.getCollection("products").drop();
+        mongoTemplate.dropCollection("products");
         repository = new MongoProductsRepository(crudRepository);
     }
 

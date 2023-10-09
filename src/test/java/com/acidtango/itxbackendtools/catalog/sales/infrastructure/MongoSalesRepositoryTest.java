@@ -29,7 +29,7 @@ public class MongoSalesRepositoryTest {
 
     @BeforeEach
     void init() {
-        mongoTemplate.getCollection("sales").drop();
+        mongoTemplate.dropCollection("sales");
         repository = new MongoSalesRepository(crudRepository);
     }
 
