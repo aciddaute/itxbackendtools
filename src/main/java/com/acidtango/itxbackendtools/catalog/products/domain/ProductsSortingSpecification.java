@@ -11,7 +11,7 @@ public class ProductsSortingSpecification {
         this.stockCriteriaWeight = stockCriteriaWeight;
     }
 
-    static ProductsSortingSpecification createNew(Double saleUnitsWeight, Double stockCriteriaWeight) {
+    public static ProductsSortingSpecification createNew(Double saleUnitsWeight, Double stockCriteriaWeight) {
         return new ProductsSortingSpecification(saleUnitsWeight, stockCriteriaWeight);
     }
 
