@@ -15,7 +15,7 @@ public class ProductsSortingSpecification {
         return new ProductsSortingSpecification(saleUnitsWeight, stockCriteriaWeight);
     }
 
-    ProductsSortingScore computeCompoundSortingScore(Product product) {
+    public ProductsSortingScore computeCompoundSortingScore(Product product) {
         SaleUnitsProductsSortingCriteria saleUnitsCriteria =
                 new SaleUnitsProductsSortingCriteria(saleUnitsCriteriaWeight);
         StockProductsSortingCriteria stockCriteria = new StockProductsSortingCriteria(stockCriteriaWeight);

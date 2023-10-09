@@ -2,7 +2,7 @@ package com.acidtango.itxbackendtools.catalog.products.domain;
 
 import com.acidtango.itxbackendtools.shared.domain.ValueObject;
 
-public class ProductsSortingScore extends ValueObject {
+public class ProductsSortingScore extends ValueObject implements Comparable<ProductsSortingScore> {
 
     private final Double score;
 
@@ -18,11 +18,16 @@ public class ProductsSortingScore extends ValueObject {
         return new ProductsSortingScore(0d);
     }
 
-    Double getValue() {
+    public Double getValue() {
         return score;
     }
 
     ProductsSortingScore add(ProductsSortingScore other) {
         return new ProductsSortingScore(score + other.score);
+    }
+
+    @Override
+    public int compareTo(ProductsSortingScore other) {
+        return Double.compare(score, other.score);
     }
 }
